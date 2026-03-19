@@ -32,17 +32,19 @@ const client = new Discord.Client({
 
 // Command & Event Handling
 
+function loadWithFileFilter(path: string) {
+  return fs
+    .readdirSync(path)
+    .filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
+}
+
 client.commands = new Discord.Collection();
 
 const commandsPath = path.join(process.cwd(), "commands");
 const eventsPath = path.join(process.cwd(), "events");
 
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
-const eventFiles = fs
-  .readdirSync(eventsPath)
-  .filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
+const commandFiles = loadWithFileFilter(commandsPath);
+const eventFiles = loadWithFileFilter(eventsPath);
 
 let [commandsLoaded, commandsToLoad] = [0, commandFiles.length];
 let [eventsLoaded, eventsToLoad] = [0, eventFiles.length];
