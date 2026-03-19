@@ -38,6 +38,10 @@ function loadWithFileFilter(path: string) {
     .filter((file) => file.endsWith(".ts") || file.endsWith(".js"));
 }
 
+function onceEventCleanup(eventPath: string) {
+  delete require.cache[require.resolve(eventPath)];
+}
+
 client.commands = new Discord.Collection();
 
 const commandsPath = path.join(process.cwd(), "commands");
@@ -106,7 +110,10 @@ for (const filePath of eventFiles) {
     typeof eventModule.once === "boolean" &&
     eventModule.once
   ) {
-    client.once(eventName, (...args) => eventRun(client, ...args));
+    client.once(eventName, async (...args) => {
+      await eventRun(client, ...args);
+      onceEventCleanup(path.join(eventsPath, filePath));
+    });
     console.log(
       `Loaded event (once): ${eventName} \t\t[${++eventsLoaded}/${eventsToLoad}]`,
     );

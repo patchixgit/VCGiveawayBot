@@ -17,6 +17,7 @@ import { BotEvent } from "../types/BotEvent";
 
 export default {
   name: Events.ClientReady,
+  once: true,
 
   run: (client: VCGiveawayBotClient) => {
     console.log(`Logged in as ${client.user?.tag}!`);
