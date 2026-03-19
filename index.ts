@@ -16,6 +16,7 @@ import fs from "fs";
 import path from "path";
 import { Command } from "./types/Command";
 import { VCGiveawayBotClient } from "./types/Client";
+import { BotEvent } from "./types/BotEvent";
 
 const GatewayIntentBits = Discord.GatewayIntentBits;
 
@@ -78,10 +79,14 @@ for (const filePath of commandFiles) {
   );
 }
 
-console.log("Finished Loading Commands. " + `\t\t[${commandsLoaded}/${commandsToLoad}]`);
+console.log(
+  "Finished Loading Commands. " + `\t\t[${commandsLoaded}/${commandsToLoad}]`,
+);
 
 for (const filePath of eventFiles) {
-  let eventModule = await import(path.join(eventsPath, filePath));
+  let eventModule: BotEvent | { default: BotEvent } = await import(
+    path.join(eventsPath, filePath)
+  );
 
   if ("default" in eventModule && eventModule.default) {
     eventModule = eventModule.default;
@@ -91,12 +96,7 @@ for (const filePath of eventFiles) {
     console.warn(`Event ${filePath} is missing required properties.`);
     continue;
   }
-
-  const eventName: string = eventModule.name;
-  const eventRun: (
-    client: VCGiveawayBotClient,
-    ...args: any[]
-  ) => Promise<void> = eventModule.run;
+  const { name: eventName, run: eventRun } = eventModule;
 
   if (
     "once" in eventModule &&
@@ -115,7 +115,8 @@ for (const filePath of eventFiles) {
   }
 }
 
-console.log("Finished Loading Events. " + `\t\t[${eventsLoaded}/${eventsToLoad}]`);
-
+console.log(
+  "Finished Loading Events. " + `\t\t[${eventsLoaded}/${eventsToLoad}]`,
+);
 
 await client.login(process.env.DISCORD_TOKEN);
