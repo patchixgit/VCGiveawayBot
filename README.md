@@ -9,10 +9,15 @@ This is licensed under the Apache 2.0 License. Please review the LICENSE file an
 ---
 ## Setting up the bot
 
+* Create an application on the Discord Developer dashboard. For instructions,use https://duckduckgo.com (or desired search engine) to look into how to do this. 
+
+* Ensure the Message Content Gateway Intent is enabled.
+
 * Add your .env variables. An example .env file is shown below.
 
 ```
 DISCORD_TOKEN="YourTokenHere"
+BOT_PREFIX="(desired prefix)"
 ```
 
 * Install modules. 

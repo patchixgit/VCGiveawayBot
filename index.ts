@@ -26,6 +26,7 @@ const client = new Discord.Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.MessageContent,
   ],
 }) as VCGiveawayBotClient;
 
