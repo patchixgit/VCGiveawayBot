@@ -11,12 +11,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Client, Collection, Snowflake, TextChannel, VoiceChannel } from "discord.js";
-import { Command } from "./Command";
-import { RouletteGame } from "../utils/game";
+import { Events, VoiceState } from "discord.js";
+import { VCGiveawayBotClient } from "../types/Client";
+import { BotEvent } from "../types/BotEvent";
 
-export interface VCGiveawayBotClient extends Client {
-  commands: Collection<string, Command>;
+export default {
+  name: Events.VoiceStateUpdate,
+  once: true,
 
-  game: RouletteGame | null;
-}
+  run: (
+    client: VCGiveawayBotClient,
+    oldState: VoiceState,
+    newState: VoiceState,
+  ) => {
+    if (client.game) {
+      client.game.onVoiceUpdate(oldState, newState);
+    } else return;
+  },
+} as BotEvent;

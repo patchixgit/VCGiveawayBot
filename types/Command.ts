@@ -12,9 +12,10 @@
 // limitations under the License.
 
 import { Client, Message } from "discord.js";
+import { VCGiveawayBotClient } from "./Client";
 
 export interface Command {
     name: string;
     aliases: string[];
-    run: (client: Client, message: Message, args: string[]) => Promise<void>;
+    run: (client: VCGiveawayBotClient, message: Message, args: string[]) => Promise<void>;
 };

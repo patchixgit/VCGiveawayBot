@@ -1,0 +1,14 @@
+{
+  "vcChannelId": "",
+  "txtChannelId": "",
+  "timeToJoin": 0,
+  "eliminationPassWaitTime": 0,
+  "maxPlayers": 45,
+
+  "StartGamePerms": {
+    "UserIds" : [],
+    "RoleIds" : []
+  },
+
+  "BlacklistedUserIds": [""]
+}
