@@ -1,14 +1,14 @@
 {
-  "vcChannelId": "",
-  "txtChannelId": "",
-  "timeToJoin": 0,
-  "eliminationPassWaitTime": 0,
+  "vcChannelId": "1456021462489104546",
+  "txtChannelId": "1456022833858744515",
+  "timeToJoin": 30000,
+  "eliminationPassWaitTime": 10000,
   "maxPlayers": 45,
 
   "StartGamePerms": {
-    "UserIds" : [],
+    "UserIds" : ["1378178953864417342"],
     "RoleIds" : []
   },
 
-  "BlacklistedUserIds": [""]
+  "BlacklistedUserIds": ["1100023356922794046"]
 }

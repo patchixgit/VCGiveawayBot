@@ -90,5 +90,10 @@ export default {
     // set the game instance to the client so other commands and events can access it
 
     client.game = game;
+
+    game.startGame();
+
+    message.reply("initialized"); 
+    return;
   },
 } as Command;

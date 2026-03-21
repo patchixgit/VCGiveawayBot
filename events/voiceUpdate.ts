@@ -17,7 +17,7 @@ import { BotEvent } from "../types/BotEvent";
 
 export default {
   name: Events.VoiceStateUpdate,
-  once: true,
+  once: false,
 
   run: (
     client: VCGiveawayBotClient,
@@ -25,6 +25,8 @@ export default {
     newState: VoiceState,
   ) => {
     if (client.game) {
+      console.log("Voice state updated, passing to game instance...");
+      console.log(oldState, newState);
       client.game.onVoiceUpdate(oldState, newState);
     } else return;
   },
